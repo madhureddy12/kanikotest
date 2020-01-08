@@ -18,8 +18,9 @@ spec:
     command:
     - /busybox/cat
     tty: true
-    
-    
+    env:
+      - name: GOOGLE_APPLICATION_CREDENTIALS
+        value: /secret/kaniko-secret.json
 """
   ) {
 
