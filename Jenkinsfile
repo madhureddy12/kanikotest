@@ -26,7 +26,7 @@ spec:
     stage('Build with Kaniko') {
       git 'https://github.com/madhureddy12/kanikotest.git'
       container('kaniko') {
-        sh '/kaniko/executor Dockerfile --insecure --skip-tls-verify --cache=true --destination=docker pull asia.gcr.io/gcp-shared-host-nonprod-260909/kaniko:latest'
+        sh '/kaniko/executor Dockerfile --insecure --skip-tls-verify --cache=true --destination=asia.gcr.io/gcp-shared-host-nonprod-260909/kaniko:latest'
       }
     }
   }
