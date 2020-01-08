@@ -24,6 +24,7 @@ spec:
 
   node(POD_LABEL) {
     stage('Build with Kaniko') {
+      git 'https://github.com/madhureddy12/kanikotest.git'
       container('kaniko') {
         sh '/kaniko/executor Dockerfile --insecure --skip-tls-verify --cache=true --destination=docker pull asia.gcr.io/gcp-shared-host-nonprod-260909/kaniko:latest'
       }
