@@ -13,18 +13,31 @@ kind: Pod
 spec:
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor
+    image: gcr.io/kaniko-project/executor:debug-539ddefcae3fd6b411a95982a830d987f4214251
     imagePullPolicy: Always
     command:
     - /busybox/cat
     tty: true
+    volumeMounts:
+      - name: jenkins-docker-cfg
+        mountPath: /kaniko/.docker
+  volumes:
+  - name: jenkins-docker-cfg
+    projected:
+      sources:
+      - secret:
+          name: regcred
+          items:
+            - key: .dockerconfigjson
+              path: config.json
 """
   ) {
-node(POD_LABEL) {
+
+  node(POD_LABEL) {
     stage('Build with Kaniko') {
       git 'https://github.com/madhureddy12/kanikotest.git'
       container('kaniko') {
-        sh '/kaniko/executor -f Dockerfile --insecure --skip-tls-verify --cache=true --destination=asia.gcr.io/gcp-shared-host-nonprod-260909/kaniko:latest'
+        sh '/kaniko/executor -f `pwd`/Dockerfile --insecure --skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage'
       }
     }
   }
