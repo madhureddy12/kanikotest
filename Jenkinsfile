@@ -25,7 +25,7 @@ spec:
   node(POD_LABEL) {
     stage('Build with Kaniko') {
       container('kaniko') {
-        sh '/kaniko/executor Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=docker pull asia.gcr.io/gcp-shared-host-nonprod-260909/kaniko:latest'
+        sh '/kaniko/executor Dockerfile --insecure --skip-tls-verify --cache=true --destination=docker pull asia.gcr.io/gcp-shared-host-nonprod-260909/kaniko:latest'
       }
     }
   }
