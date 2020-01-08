@@ -20,19 +20,10 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
-ARG version=3.36-1
-FROM jenkins/slave:$version
+#This is a sample Image 
+FROM ubuntu 
+MAINTAINER demousr@gmail.com 
 
-ARG version
-MAINTAINER Oleg Nenashev <o.v.nenashev@gmail.com>
-LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols" Vendor="Jenkins project" Version="$version"
-
-ARG user=jenkins
-
-USER root
-COPY jenkins-agent /usr/local/bin/jenkins-agent
-RUN chmod +x /usr/local/bin/jenkins-agent &&\
-    ln -s /usr/local/bin/jenkins-agent /usr/local/bin/jenkins-slave
-USER ${user}
-
-ENTRYPOINT ["jenkins-agent"]
+RUN apt-get update 
+RUN apt-get install vim -y
+CMD [“echo”,”Image created”]
