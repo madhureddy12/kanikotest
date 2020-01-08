@@ -20,8 +20,7 @@ spec:
     tty: true
 """
   ) {
-
-  node(POD_LABEL) {
+node(POD_LABEL) {
     stage('Build with Kaniko') {
       git 'https://github.com/madhureddy12/kanikotest.git'
       container('kaniko') {
